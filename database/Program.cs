@@ -10,8 +10,13 @@ namespace database
     {
         static void Main(string[] args)
         {
-            var context = new VIACinema();
+            var context = new VCinema();
 
+            MovieFeeder feeder = new MovieFeeder("71e4cebd739f9f30aec016154250620f", context);
+
+            feeder.getUpcommingMovies();
+
+            Console.ReadKey();
 
             ////creating a person object and inserting into database
             //var person1 = new Person()
@@ -64,26 +69,26 @@ namespace database
             //context.Reservations.Add(reservation1); 
             //context.SaveChanges();
 
-            ICollection<Reservation> reservations = context.Reservations.ToList();
-            foreach (var reservation in reservations)
-            {
-                var person = reservation.Person;
-                var movie = reservation.Schedule.Movie;
-                Console.WriteLine("Reservation");
-                Console.WriteLine("Person name: {0}, email: {1}",
-                    person.name,
-                    person.email);
-                Console.WriteLine("Movie name: {0}, imdb: {1}",
-                    movie.name,
-                    movie.imdb_id);
-                Console.WriteLine("Day: {0}, time: {1}, Room: {2}, Seat: {3}",
-                    reservation.day,
-                    reservation.time,
-                    reservation.room,
-                    reservation.seat_no);
-            }
+            //ICollection<Reservation> reservations = context.Reservations.ToList();
+            //foreach (var reservation in reservations)
+            //{
+            //    var person = reservation.Person;
+            //    var movie = reservation.Schedule.Movie;
+            //    Console.WriteLine("Reservation");
+            //    Console.WriteLine("Person name: {0}, email: {1}",
+            //        person.name,
+            //        person.email);
+            //    Console.WriteLine("Movie name: {0}, imdb: {1}",
+            //        movie.name,
+            //        movie.imdb_id);
+            //    Console.WriteLine("Day: {0}, time: {1}, Room: {2}, Seat: {3}",
+            //        reservation.day,
+            //        reservation.time,
+            //        reservation.room,
+            //        reservation.seat_no);
+            //}
 
-            Console.ReadKey();
+
         }
     }
 }

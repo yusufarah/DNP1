@@ -13,10 +13,10 @@ namespace database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VIACinema : DbContext
+    public partial class VCinema : DbContext
     {
-        public VIACinema()
-            : base("name=VIACinema")
+        public VCinema()
+            : base("name=VCinema")
         {
         }
     
@@ -27,7 +27,7 @@ namespace database
     
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Person> People { get; set; }
-        public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
     }
 }

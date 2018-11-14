@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CinemaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="VIACinema.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Movie">
           <Key>
             <PropertyRef Name="imdb_id" />
@@ -26,33 +26,31 @@
           <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dnp.dbo.Reservation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Reservation">
           <Key>
-            <PropertyRef Name="day" />
-            <PropertyRef Name="time" />
             <PropertyRef Name="room" />
             <PropertyRef Name="IMDB_id" />
             <PropertyRef Name="email" />
             <PropertyRef Name="seat_no" />
+            <PropertyRef Name="date_time" />
           </Key>
-          <Property Name="day" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="time" Type="numeric" Precision="4" Scale="0" Nullable="false" />
           <Property Name="room" Type="numeric" Precision="2" Scale="0" Nullable="false" />
           <Property Name="IMDB_id" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="seat_no" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="date_time" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
-            <PropertyRef Name="day" />
-            <PropertyRef Name="time" />
             <PropertyRef Name="room" />
             <PropertyRef Name="IMDB_id" />
+            <PropertyRef Name="date_time" />
           </Key>
-          <Property Name="day" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="time" Type="numeric" Precision="4" Scale="0" Nullable="false" />
           <Property Name="room" Type="numeric" Precision="2" Scale="0" Nullable="false" />
           <Property Name="IMDB_id" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="date_time" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Reservation_Person">
           <End Role="Person" Type="Self.Person" Multiplicity="1" />
@@ -66,21 +64,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RESERVATION_SCHEDULE">
+        <Association Name="FK_Reservation_Schedule">
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Schedule">
-              <PropertyRef Name="day" />
-              <PropertyRef Name="time" />
               <PropertyRef Name="room" />
               <PropertyRef Name="IMDB_id" />
+              <PropertyRef Name="date_time" />
             </Principal>
             <Dependent Role="Reservation">
-              <PropertyRef Name="day" />
-              <PropertyRef Name="time" />
               <PropertyRef Name="room" />
               <PropertyRef Name="IMDB_id" />
+              <PropertyRef Name="date_time" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -96,16 +92,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CinemaModelStoreContainer">
+        <EntityContainer Name="VIACinemaStoreContainer">
           <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Reservation].[room] AS [room], 
+    [Reservation].[IMDB_id] AS [IMDB_id], 
+    [Reservation].[email] AS [email], 
+    [Reservation].[seat_no] AS [seat_no], 
+    [Reservation].[date_time] AS [date_time]
+    FROM [dbo].[Reservation] AS [Reservation]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Reservation_Person" Association="Self.FK_Reservation_Person">
             <End Role="Person" EntitySet="Person" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK_RESERVATION_SCHEDULE" Association="Self.FK_RESERVATION_SCHEDULE">
+          <AssociationSet Name="FK_Reservation_Schedule" Association="Self.FK_Reservation_Schedule">
             <End Role="Schedule" EntitySet="Schedule" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
@@ -118,7 +122,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="VIACinema" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Movie">
           <Key>
             <PropertyRef Name="imdb_id" />
@@ -142,37 +146,33 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Person" FromRole="Person" ToRole="Reservation" />
         </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="room" />
+            <PropertyRef Name="IMDB_id" />
+            <PropertyRef Name="date_time" />
+          </Key>
+          <Property Name="room" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="IMDB_id" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Movie" Relationship="Self.FK_SCHEDULE_MOVIE_ID" FromRole="Schedule" ToRole="Movie" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Schedule" FromRole="Schedule" ToRole="Reservation" />
+        </EntityType>
         <EntityType Name="Reservation">
           <Key>
-            <PropertyRef Name="day" />
-            <PropertyRef Name="time" />
             <PropertyRef Name="room" />
             <PropertyRef Name="IMDB_id" />
             <PropertyRef Name="email" />
             <PropertyRef Name="seat_no" />
+            <PropertyRef Name="date_time" />
           </Key>
-          <Property Name="day" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="time" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
           <Property Name="room" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
           <Property Name="IMDB_id" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="seat_no" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_time" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Person" Relationship="Self.FK_Reservation_Person" FromRole="Reservation" ToRole="Person" />
-          <NavigationProperty Name="Schedule" Relationship="Self.FK_RESERVATION_SCHEDULE" FromRole="Reservation" ToRole="Schedule" />
-        </EntityType>
-        <EntityType Name="Schedule">
-          <Key>
-            <PropertyRef Name="day" />
-            <PropertyRef Name="time" />
-            <PropertyRef Name="room" />
-            <PropertyRef Name="IMDB_id" />
-          </Key>
-          <Property Name="day" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="time" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
-          <Property Name="room" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
-          <Property Name="IMDB_id" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Movie" Relationship="Self.FK_SCHEDULE_MOVIE_ID" FromRole="Schedule" ToRole="Movie" />
-          <NavigationProperty Name="Reservations" Relationship="Self.FK_RESERVATION_SCHEDULE" FromRole="Schedule" ToRole="Reservation" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FK_Reservation_Schedule" FromRole="Reservation" ToRole="Schedule" />
         </EntityType>
         <Association Name="FK_SCHEDULE_MOVIE_ID">
           <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
@@ -198,29 +198,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RESERVATION_SCHEDULE">
+        <Association Name="FK_Reservation_Schedule">
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Schedule">
-              <PropertyRef Name="day" />
-              <PropertyRef Name="time" />
               <PropertyRef Name="room" />
               <PropertyRef Name="IMDB_id" />
+              <PropertyRef Name="date_time" />
             </Principal>
             <Dependent Role="Reservation">
-              <PropertyRef Name="day" />
-              <PropertyRef Name="time" />
               <PropertyRef Name="room" />
               <PropertyRef Name="IMDB_id" />
+              <PropertyRef Name="date_time" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VIACinema" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="VCinema" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Movies" EntityType="Self.Movie" />
           <EntitySet Name="People" EntityType="Self.Person" />
-          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
           <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
           <AssociationSet Name="FK_SCHEDULE_MOVIE_ID" Association="Self.FK_SCHEDULE_MOVIE_ID">
             <End Role="Movie" EntitySet="Movies" />
             <End Role="Schedule" EntitySet="Schedules" />
@@ -229,7 +227,7 @@
             <End Role="Person" EntitySet="People" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK_RESERVATION_SCHEDULE" Association="Self.FK_RESERVATION_SCHEDULE">
+          <AssociationSet Name="FK_Reservation_Schedule" Association="Self.FK_Reservation_Schedule">
             <End Role="Schedule" EntitySet="Schedules" />
             <End Role="Reservation" EntitySet="Reservations" />
           </AssociationSet>
@@ -239,9 +237,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CinemaModelStoreContainer" CdmEntityContainer="VIACinema">
+        <EntityContainerMapping StorageEntityContainer="VIACinemaStoreContainer" CdmEntityContainer="VCinema">
           <EntitySetMapping Name="Movies">
-            <EntityTypeMapping TypeName="CinemaModel.Movie">
+            <EntityTypeMapping TypeName="VIACinema.Movie">
               <MappingFragment StoreEntitySet="Movie">
                 <ScalarProperty Name="imdb_id" ColumnName="imdb_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -256,32 +254,30 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="CinemaModel.Person">
+            <EntityTypeMapping TypeName="VIACinema.Person">
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="VIACinema.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="IMDB_id" ColumnName="IMDB_id" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Reservations">
-            <EntityTypeMapping TypeName="CinemaModel.Reservation">
+            <EntityTypeMapping TypeName="VIACinema.Reservation">
               <MappingFragment StoreEntitySet="Reservation">
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="room" ColumnName="room" />
                 <ScalarProperty Name="IMDB_id" ColumnName="IMDB_id" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="seat_no" ColumnName="seat_no" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Schedules">
-            <EntityTypeMapping TypeName="CinemaModel.Schedule">
-              <MappingFragment StoreEntitySet="Schedule">
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="time" ColumnName="time" />
-                <ScalarProperty Name="room" ColumnName="room" />
-                <ScalarProperty Name="IMDB_id" ColumnName="IMDB_id" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0a4cfa028b634fffa8398c62591abb8e" Name="Diagram1">
-        <EntityTypeShape EntityType="CinemaModel.Movie" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemaModel.Person" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemaModel.Reservation" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemaModel.Schedule" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="CinemaModel.FK_SCHEDULE_MOVIE_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="CinemaModel.FK_Reservation_Person" ManuallyRouted="false" />
-        <AssociationConnector Association="CinemaModel.FK_RESERVATION_SCHEDULE" ManuallyRouted="false" />
+      <Diagram DiagramId="eb8b28c1417041f0997e75a449b811dc" Name="Diagram1">
+        <EntityTypeShape EntityType="VIACinema.Movie" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VIACinema.Person" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VIACinema.Schedule" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VIACinema.Reservation" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="VIACinema.FK_SCHEDULE_MOVIE_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="VIACinema.FK_Reservation_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="VIACinema.FK_Reservation_Schedule" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

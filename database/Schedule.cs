@@ -20,10 +20,9 @@ namespace database
             this.Reservations = new HashSet<Reservation>();
         }
     
-        public string day { get; set; }
-        public decimal time { get; set; }
         public decimal room { get; set; }
         public string IMDB_id { get; set; }
+        public System.DateTime date_time { get; set; }
     
         public virtual Movie Movie { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

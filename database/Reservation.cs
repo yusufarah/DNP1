@@ -14,12 +14,11 @@ namespace database
     
     public partial class Reservation
     {
-        public string day { get; set; }
-        public decimal time { get; set; }
         public decimal room { get; set; }
         public string IMDB_id { get; set; }
         public string email { get; set; }
         public string seat_no { get; set; }
+        public System.DateTime date_time { get; set; }
     
         public virtual Person Person { get; set; }
         public virtual Schedule Schedule { get; set; }
