@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VIACinemaDB;
+using VIACinemaDB.Model;
 
-namespace database
+namespace TestVIADataBaseLib
 {
     class Program
     {
@@ -13,7 +15,7 @@ namespace database
 
 
             ////get and add upcomming movies to database
-            var context = new VCinema();
+            var context = new VIACinemaEntities();
             //MovieFeeder feeder = new MovieFeeder("71e4cebd739f9f30aec016154250620f", context);
             //feeder.getUpcommingMovies();
 
@@ -60,27 +62,27 @@ namespace database
 
 
             //creating reservation object and saving into database
-            var reservation = new Reservation()
-            {
-                room = 5,
-                IMDB_id = "tt5523010",
-                date_time = new DateTime(2018, 11, 20, 17, 00, 00),
-                email = "VIACINEMA2018@mail.com",
-                seat_no = "2A"
-            };
+            //var reservation = new Reservation()
+            //{
+            //    room = 5,
+            //    IMDB_id = "tt5523010",
+            //    date_time = new DateTime(2018, 11, 20, 17, 00, 00),
+            //    email = "VIACINEMA2018@mail.com",
+            //    seat_no = 22
+            //};
 
 
-            //context.Reservations.Add(reservation1);
-            //context.SaveChanges();
+            ////context.Reservations.Add(reservation1);
+            ////context.SaveChanges();
 
-            Reservation savedReservation = context.Reservations.Where
-                (
-                    c => c.room == reservation.room &&
-                    c.IMDB_id == reservation.IMDB_id &&
-                    c.date_time == reservation.date_time &&
-                    c.email == reservation.email &&
-                    c.seat_no == reservation.seat_no
-                ).Single();
+            //Reservation savedReservation = context.Reservations.Where
+            //    (
+            //        c => c.room == reservation.room &&
+            //        c.IMDB_id == reservation.IMDB_id &&
+            //        c.date_time == reservation.date_time &&
+            //        c.email == reservation.email &&
+            //        c.seat_no == reservation.seat_no
+            //    ).Single();
             
 
 

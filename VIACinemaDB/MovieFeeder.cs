@@ -7,15 +7,16 @@ using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
+using VIACinemaDB.Model;
 
-namespace VIACinemaDBAccess
+namespace VIACinemaDB
 {
     class MovieFeeder
     {
         private TMDbClient client;
-        public VCinema Context { get;  set; }
-
-        public MovieFeeder(string apiKey, VCinema context)
+        public VIACinemaEntities Context { get;  set; }
+       
+        public MovieFeeder(string apiKey, VIACinemaEntities context)
         {
             Context = context;
             client = new TMDbClient(apiKey);
@@ -32,7 +33,7 @@ namespace VIACinemaDBAccess
                 if(searchMovie.OriginalLanguage.Contains("en"))
                 {
 
-                    Movie movie = getMovieByID(searchMovie.Id);
+                    Model.Movie movie = getMovieByID(searchMovie.Id);
                     Context.Movies.Add(movie);
                     Context.SaveChanges();
                     
@@ -45,7 +46,7 @@ namespace VIACinemaDBAccess
 
         
         
-        private Movie getMovieByID(int id)
+        private Model.Movie getMovieByID(int id)
         {
 
             TMDbLib.Objects.Movies.Movie movie = client.GetMovieAsync(id, MovieMethods.Credits).Result;
@@ -86,10 +87,10 @@ namespace VIACinemaDBAccess
             int duration = (int)movie.Runtime;
 
             string imagePath = $"https://image.tmdb.org/t/p/w200{movie.PosterPath}";
-            
 
 
-            Movie m = new Movie()
+
+            Model.Movie m = new Model.Movie()
             {
                 imdb_id = imdb,
                 name = movieTitle,

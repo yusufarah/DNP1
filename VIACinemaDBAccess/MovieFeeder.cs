@@ -13,9 +13,9 @@ namespace VIACinemaDBAccess
     class MovieFeeder
     {
         private TMDbClient client;
-        public VCinema Context { get;  set; }
-
-        public MovieFeeder(string apiKey, VCinema context)
+        public ViaCinemaEntities Context { get;  set; }
+       
+        public MovieFeeder(string apiKey, ViaCinemaEntities context)
         {
             Context = context;
             client = new TMDbClient(apiKey);

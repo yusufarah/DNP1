@@ -9,31 +9,40 @@ using Google.Apis.Util.Store;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace database
+namespace CheckoutEmailService
 {
-    class Mail
+    public class MailService
     {
-        
-        public static void sendBookingConfirmationTo(Reservation reservation)
+        private GmailService gmailService;
+        public string SenderMail { get; set; }
+
+        public MailService(string senderMail)
+        {
+            SenderMail = senderMail;
+            gmailService = getGmailService();
+        }
+
+        public void sendBookingConfirmationTo(string email, string movieName, DateTime date_time,
+            decimal room, string seatNo, decimal price)
         {
             var msg = new AE.Net.Mail.MailMessage
             {
                 Subject = "Thank you! Your booking details",
-                Body = $"Movie title: {reservation.Schedule.Movie.name}"+ Environment.NewLine +
-                $"date and time: {reservation.date_time}" + Environment.NewLine +
-                $"Room: {reservation.room}" + Environment.NewLine +
-                $"seat: {reservation.seat_no}" + Environment.NewLine +
-                $"price: {reservation.Schedule.Movie.price}",
-                From = new MailAddress("VIACINEMA2018@gmail.com")
+                Body = $"Movie title: {movieName}"+ Environment.NewLine +
+                $"date and time: {date_time}" + Environment.NewLine +
+                $"Room: {room}" + Environment.NewLine +
+                $"seat: {seatNo}" + Environment.NewLine +
+                $"price: {price}",
+                From = new MailAddress(SenderMail)
             };
 
-            msg.To.Add(new MailAddress(reservation.email));
+            msg.To.Add(new MailAddress(email));
             msg.ReplyTo.Add(msg.From); 
             var msgStr = new StringWriter();
             msg.Save(msgStr);
 
             
-            var gmail = getGmailService();
+            var gmail = gmailService;
             var result = gmail.Users.Messages.Send(new Message
             {
                 Raw = Base64UrlEncode(msgStr.ToString())
@@ -41,7 +50,7 @@ namespace database
             Console.WriteLine("Message ID {0} sent.", result.Id);
         }
 
-        private static string Base64UrlEncode(string input)
+        private string Base64UrlEncode(string input)
         {
             var inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
             // Special "url-safe" base64 encode.
@@ -51,12 +60,12 @@ namespace database
               .Replace("=", "");
         }
 
-        private static GmailService getGmailService()
+        private GmailService getGmailService()
         {
             // If modifying these scopes, delete your previously saved credentials
             // at ~/.credentials/gmail-dotnet-quickstart.json
             string[] Scopes = { GmailService.Scope.GmailCompose };
-            string ApplicationName = "Gmail API .NET Quickstart";
+            string ApplicationName = "VIA Cinema Check Out confirmation Service";
             UserCredential credential;
 
             using (var stream =
