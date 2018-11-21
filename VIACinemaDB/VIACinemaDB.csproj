@@ -131,6 +131,7 @@
     <Compile Include="Persistence\Repositories\ScheduleRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ScheduleGenerator.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
