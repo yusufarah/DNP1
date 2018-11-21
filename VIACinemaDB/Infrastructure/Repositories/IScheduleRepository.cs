@@ -4,9 +4,7 @@ using VIACinemaDB.Model;
 
 namespace VIACinemaDB.Infrastructure.Repositories
 {
-    public interface IPersonRepository : IRepository<Person>
+    public interface IScheduleRepository : IRepository<Schedule>
     {
-        int LastInsertedPersonID();
     }
-    
 }

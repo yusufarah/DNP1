@@ -1,6 +1,4 @@
-﻿using Queries.Core.Domain;
-using Queries.Core.Repositories;
-using Queries.Persistence.Repositories;
+﻿
 using System.Data.Entity;
 using System.Linq;
 using VIACinemaDB.Infrastructure.Repositories;

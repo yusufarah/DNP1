@@ -14,11 +14,17 @@ namespace VIACinemaDB.Persistence
             _context = context;
             Persons = new PersonRepository(_context);
             Reservations = new ReservationRepository(_context);
+            Schedules = new ScheduleRepository(_context);
+            Movies = new MovieRepository(_context);
+
         }
 
         public IPersonRepository Persons { get; private set; }
         public IReservationRepository Reservations { get; private set; }
-        
+
+        public IMovieRepository Movies { get; private set; }
+
+        public IScheduleRepository Schedules { get; private set; }
 
         public int Complete()
         {

@@ -7,6 +7,8 @@ namespace VIACinemaDB.Infrastructure
     {
         IPersonRepository Persons { get; }
         IReservationRepository Reservations { get; }
+        IMovieRepository Movies { get; }
+        IScheduleRepository Schedules { get; }
         int Complete();
     }
 }

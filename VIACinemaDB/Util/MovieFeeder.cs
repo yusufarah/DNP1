@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
+using VIACinemaDB.Infrastructure;
 using VIACinemaDB.Model;
+using VIACinemaDB.Persistence;
 
-namespace VIACinemaDB
+namespace VIACinemaDB.Util
 {
-    class MovieFeeder
+    public class MovieFeeder
     {
         private TMDbClient client;
-        public VIACinemaEntities Context { get;  set; }
-       
-        public MovieFeeder(string apiKey, VIACinemaEntities context)
+        private IUnitOfWork unitOfWork;
+        public MovieFeeder(string apiKey)
         {
-            Context = context;
             client = new TMDbClient(apiKey);
+            unitOfWork = new UnitOfWork(new VIACinemaEntities());
         }
 
         public async void getUpcommingMovies()
@@ -33,14 +31,13 @@ namespace VIACinemaDB
                 if(searchMovie.OriginalLanguage.Contains("en"))
                 {
 
-                    Model.Movie movie = getMovieByID(searchMovie.Id);
-                    Context.Movies.Add(movie);
-                    Context.SaveChanges();
+                    unitOfWork.Movies.Add(getMovieByID(searchMovie.Id));
                     
                     Console.WriteLine(searchMovie.Title);
                     Console.WriteLine();
                 }
             }
+            unitOfWork.Complete();
             
         }
 

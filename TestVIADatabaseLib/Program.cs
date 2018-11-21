@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VIACinemaDB;
+using VIACinemaDB.Util;
+using VIACinemaDB.Infrastructure;
 using VIACinemaDB.Model;
+using VIACinemaDB.Persistence;
 
 namespace TestVIADataBaseLib
 {
@@ -13,10 +15,13 @@ namespace TestVIADataBaseLib
         static void Main(string[] args)
         {
 
+            IUnitOfWork unitOfWork = new UnitOfWork(new VIACinemaEntities());
+
+
 
             ////get and add upcomming movies to database
-            var context = new VIACinemaEntities();
-            //MovieFeeder feeder = new MovieFeeder("71e4cebd739f9f30aec016154250620f", context);
+            //var context = new VIACinemaEntities();
+            //MovieFeeder feeder = new MovieFeeder("71e4cebd739f9f30aec016154250620f");
             //feeder.getUpcommingMovies();
 
 
@@ -27,9 +32,10 @@ namespace TestVIADataBaseLib
             //    name = "person1"
             //};
 
-            //context.People.Add(person1);
-            //context.SaveChanges();
+            //unitOfWork.Persons.Add(person1);
+            //unitOfWork.Complete();
 
+            //Console.WriteLine(unitOfWork.Persons.LastInsertedPersonID());
 
             ////creating a movie object and inseting into database
             //var movie1 = new Movie()
@@ -45,6 +51,17 @@ namespace TestVIADataBaseLib
             //    price = 10
 
             //};
+
+            //unitOfWork.Movies.Add(movie1);
+            //unitOfWork.Complete();
+
+
+            //var movies = unitOfWork.Movies.GetAll();
+
+            //foreach (var movie in movies)
+            //{
+            //    Console.WriteLine(movie.name);
+            //}
 
             //context.Movies.Add(movie1);
 
@@ -83,7 +100,7 @@ namespace TestVIADataBaseLib
             //        c.email == reservation.email &&
             //        c.seat_no == reservation.seat_no
             //    ).Single();
-            
+
 
 
             //ICollection<Reservation> reservations = context.Reservations.ToList();
