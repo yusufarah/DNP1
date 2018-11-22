@@ -7,7 +7,6 @@ using VIACinemaDB.Util;
 using VIACinemaDB.Infrastructure;
 using VIACinemaDB.Model;
 using VIACinemaDB.Persistence;
-
 namespace TestVIADataBaseLib
 {
     class Program
@@ -15,9 +14,19 @@ namespace TestVIADataBaseLib
         static void Main(string[] args)
         {
 
-            IUnitOfWork unitOfWork = new UnitOfWork(new VIACinemaEntities());
+            //IUnitOfWork unitOfWork = new UnitOfWork(new VIACinemaEntities());
+            //Schedule schedule1 = new Schedule()
+            //{
+            //    date_time = new DateTime(2018, 01, 25, 13, 50, 00),
+            //    room = 12,
+            //    movie_id = 3
+            //};
+            //unitOfWork.Schedules.Add(schedule1);
+            //unitOfWork.Complete();
 
 
+            IDBAccess iDB = new DBAccess();
+            iDB.makeNewReservation(30, 1, "VIACINEMA2018@mail.com");
 
             ////get and add upcomming movies to database
             //var context = new VIACinemaEntities();
@@ -121,7 +130,7 @@ namespace TestVIADataBaseLib
             //        reservation.room,
             //        reservation.seat_no);
             //}
-
+            Console.WriteLine("Done");
             Console.ReadKey();
 
         }

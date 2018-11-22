@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VIACinemaDB.Model;
 
-namespace DNProj
+namespace TestVIADataBaseLib
 {
     public interface IDBAccess
     {
