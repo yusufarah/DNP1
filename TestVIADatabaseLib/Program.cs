@@ -13,8 +13,28 @@ namespace TestVIADataBaseLib
     {
         static void Main(string[] args)
         {
+            
 
-            //IUnitOfWork unitOfWork = new UnitOfWork(new VIACinemaEntities());
+
+            //ScheduleGenerator scheduleGenerator = new ScheduleGenerator();
+            //scheduleGenerator.GenerateSchedule();
+
+
+            IUnitOfWork unitOfWork = new UnitOfWork(new VIACinemaEntities());
+            var movies = unitOfWork.Movies.GetAllScheduledMovies();
+
+            foreach (Movie movie in movies)
+            {
+                foreach (Schedule s in movie.Schedules)
+                {
+                    Console.WriteLine("{0}, {1}, {2}, {3} ",
+                        s.schedule_id,
+                        s.date_time,
+                        s.room,
+                        movie.name);
+                }
+            }
+
             //Schedule schedule1 = new Schedule()
             //{
             //    date_time = new DateTime(2018, 01, 25, 13, 50, 00),
@@ -25,8 +45,8 @@ namespace TestVIADataBaseLib
             //unitOfWork.Complete();
 
 
-            IDBAccess iDB = new DBAccess();
-            iDB.makeNewReservation(30, 1, "VIACINEMA2018@mail.com");
+            //IDBAccess iDB = new DBAccess();
+            //iDB.makeNewReservation(30, 1, "VIACINEMA2018@mail.com");
 
             ////get and add upcomming movies to database
             //var context = new VIACinemaEntities();
