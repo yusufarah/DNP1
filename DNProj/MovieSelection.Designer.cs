@@ -41,7 +41,7 @@
             this.lsbMovies.Name = "lsbMovies";
             this.lsbMovies.Size = new System.Drawing.Size(419, 420);
             this.lsbMovies.TabIndex = 0;
-            this.lsbMovies.SelectedIndexChanged += new System.EventHandler(this.lsbMovies_SelectedIndexChanged);
+            this.lsbMovies.DoubleClick += new System.EventHandler(this.lsbMovies_DoubleClick);
             // 
             // MovieSelection
             // 

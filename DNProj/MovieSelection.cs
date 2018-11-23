@@ -7,41 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VIACinemaDB.Model;
 
 namespace DNProj
 {
     public partial class MovieSelection : Form
     {
-        private List<Movie> temp = new List<Movie>();
+        Controller controller;
         public MovieSelection()
         {
             InitializeComponent();
+            controller = new Controller();
             addMovies();
         }
 
         private void addMovies()
         {
             lsbMovies.Items.Clear();
-            Movie movie1 = new Movie("Spiderman", "This is a movie about Spiderman", 2010);
-            Movie movie2 = new Movie("Batman", "This is a movie about Batman", 2030);
+            lsbMovies.DisplayMember = "name";
 
-            temp.Add(movie1);
-            temp.Add(movie2);
-
-
-            lsbMovies.DisplayMember = "Name";
-            lsbMovies.ValueMember = "Bio";
-
-            foreach (var item in temp)
+            foreach (var item in controller.GetMovies())
             {
                 lsbMovies.Items.Add(item);
             }
-
         }
 
-        private void lsbMovies_SelectedIndexChanged(object sender, EventArgs e)
+        private void lsbMovies_DoubleClick(object sender, EventArgs e)
         {
-            ScheduleSelection scheduleSelection = new ScheduleSelection();
+            ScheduleSelection scheduleSelection = new ScheduleSelection(lsbMovies.SelectedItem as Movie);
             scheduleSelection.ShowDialog();
         }
     }

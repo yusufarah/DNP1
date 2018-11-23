@@ -7,16 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VIACinemaDB.Model;
 
 namespace DNProj
 {
     public partial class SeatSelection : Form
     {
-        public SeatSelection()
+        private Schedule schedule;
+        public SeatSelection(Schedule s)
         {
             InitializeComponent();
-            reserveSeats();
+            schedule = s;
             CreateSeats();
+            reserveSeats(s);
             lblReserveret.Text = "";
         }
 
@@ -49,18 +52,23 @@ namespace DNProj
             foreach (Control control in panel1.Controls)
             {
                 control.Click += label_Click;
-                if (randomNumbers.Contains(Convert.ToInt32(control.Name.Substring(3))))
+            }
+        }
+
+        private void reserveSeats(Schedule schedule)
+        {
+            List<int> seatNumbers = new List<int>();
+            foreach (var reservation in schedule.Reservations)
+            {
+                seatNumbers.Add(reservation.seat_no);
+            }
+            foreach (Control control in panel1.Controls)
+            {
+                if (seatNumbers.Contains(Convert.ToInt32(control.Name.Substring(3))))
                 {
                     control.BackColor = Color.Red;
                 }
             }
-        }
-
-        private List<int> randomNumbers = new List<int>();
-        private void reserveSeats()
-        {
-            var rnd = new Random();
-            randomNumbers = Enumerable.Range(1, 150).OrderBy(x => rnd.Next()).Take(50).ToList();
         }
 
         private void label_Click(object sender, EventArgs e)
@@ -89,6 +97,11 @@ namespace DNProj
                 }
                 
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

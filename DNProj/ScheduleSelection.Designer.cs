@@ -28,79 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picPoster = new System.Windows.Forms.PictureBox();
+            this.lsbSchedule = new System.Windows.Forms.ListBox();
             this.rtxtboxBio = new System.Windows.Forms.RichTextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.clm = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnClose = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPoster)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // picPoster
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(233, 221);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.picPoster.Location = new System.Drawing.Point(13, 13);
+            this.picPoster.Name = "picPoster";
+            this.picPoster.Size = new System.Drawing.Size(200, 300);
+            this.picPoster.TabIndex = 0;
+            this.picPoster.TabStop = false;
+            // 
+            // lsbSchedule
+            // 
+            this.lsbSchedule.FormattingEnabled = true;
+            this.lsbSchedule.Location = new System.Drawing.Point(219, 12);
+            this.lsbSchedule.Name = "lsbSchedule";
+            this.lsbSchedule.Size = new System.Drawing.Size(569, 121);
+            this.lsbSchedule.TabIndex = 1;
+            this.lsbSchedule.DoubleClick += new System.EventHandler(this.lsbSchedule_DoubleClick);
             // 
             // rtxtboxBio
             // 
-            this.rtxtboxBio.Location = new System.Drawing.Point(251, 12);
+            this.rtxtboxBio.Location = new System.Drawing.Point(219, 139);
             this.rtxtboxBio.Name = "rtxtboxBio";
-            this.rtxtboxBio.ReadOnly = true;
-            this.rtxtboxBio.Size = new System.Drawing.Size(487, 221);
-            this.rtxtboxBio.TabIndex = 1;
+            this.rtxtboxBio.Size = new System.Drawing.Size(569, 174);
+            this.rtxtboxBio.TabIndex = 2;
             this.rtxtboxBio.Text = "";
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.clm});
-            this.listView1.Location = new System.Drawing.Point(13, 240);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(725, 277);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // clm
-            // 
-            this.clm.Tag = "1";
-            this.clm.Width = 100;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(662, 536);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 3;
-            this.btnClose.Text = "Cancel";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.rtxtboxBio.DoubleClick += new System.EventHandler(this.rtxtboxBio_DoubleClick);
             // 
             // ScheduleSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 571);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(800, 328);
             this.Controls.Add(this.rtxtboxBio);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lsbSchedule);
+            this.Controls.Add(this.picPoster);
             this.Name = "ScheduleSelection";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Text = "ScheduleSelection";
+            ((System.ComponentModel.ISupportInitialize)(this.picPoster)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picPoster;
+        private System.Windows.Forms.ListBox lsbSchedule;
         private System.Windows.Forms.RichTextBox rtxtboxBio;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader clm;
-        private System.Windows.Forms.Button btnClose;
     }
 }
-
