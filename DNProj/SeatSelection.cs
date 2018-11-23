@@ -17,7 +17,7 @@ namespace DNProj
             InitializeComponent();
             reserveSeats();
             CreateSeats();
-
+            lblReserveret.Text = "";
         }
 
         private void CreateSeats()

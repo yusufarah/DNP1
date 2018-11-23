@@ -16,7 +16,7 @@ namespace DNProj
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SeatSelection());
+            Application.Run(new MovieSelection());
         }
     }
 }

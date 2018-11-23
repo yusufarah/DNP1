@@ -31,9 +31,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnReserve = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.txtboxSeatNumber = new System.Windows.Forms.TextBox();
             this.lblSeatnumber = new System.Windows.Forms.Label();
             this.lblReserveret = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtboxSeatNumber = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -65,14 +66,6 @@
             this.button2.Text = "!implement";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // txtboxSeatNumber
-            // 
-            this.txtboxSeatNumber.Location = new System.Drawing.Point(615, 12);
-            this.txtboxSeatNumber.Name = "txtboxSeatNumber";
-            this.txtboxSeatNumber.ReadOnly = true;
-            this.txtboxSeatNumber.Size = new System.Drawing.Size(80, 20);
-            this.txtboxSeatNumber.TabIndex = 3;
-            // 
             // lblSeatnumber
             // 
             this.lblSeatnumber.AutoSize = true;
@@ -85,16 +78,33 @@
             // lblReserveret
             // 
             this.lblReserveret.AutoSize = true;
-            this.lblReserveret.Location = new System.Drawing.Point(13, 329);
+            this.lblReserveret.Location = new System.Drawing.Point(612, 35);
             this.lblReserveret.Name = "lblReserveret";
-            this.lblReserveret.Size = new System.Drawing.Size(0, 13);
+            this.lblReserveret.Size = new System.Drawing.Size(30, 13);
             this.lblReserveret.TabIndex = 5;
+            this.lblReserveret.Text = "temp";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(615, 51);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(281, 20);
+            this.textBox1.TabIndex = 6;
+            // 
+            // txtboxSeatNumber
+            // 
+            this.txtboxSeatNumber.Location = new System.Drawing.Point(615, 12);
+            this.txtboxSeatNumber.Name = "txtboxSeatNumber";
+            this.txtboxSeatNumber.ReadOnly = true;
+            this.txtboxSeatNumber.Size = new System.Drawing.Size(80, 20);
+            this.txtboxSeatNumber.TabIndex = 3;
             // 
             // SeatSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 493);
+            this.ClientSize = new System.Drawing.Size(908, 353);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblReserveret);
             this.Controls.Add(this.lblSeatnumber);
             this.Controls.Add(this.txtboxSeatNumber);
@@ -113,8 +123,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnReserve;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox txtboxSeatNumber;
         private System.Windows.Forms.Label lblSeatnumber;
         private System.Windows.Forms.Label lblReserveret;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtboxSeatNumber;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DNProj
 {
-    partial class Form1
+    partial class MovieSelection
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.lsbMovies = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // Form1
+            // lsbMovies
+            // 
+            this.lsbMovies.FormattingEnabled = true;
+            this.lsbMovies.Items.AddRange(new object[] {
+            "Spiderman",
+            "Batman"});
+            this.lsbMovies.Location = new System.Drawing.Point(13, 13);
+            this.lsbMovies.Name = "lsbMovies";
+            this.lsbMovies.Size = new System.Drawing.Size(419, 420);
+            this.lsbMovies.TabIndex = 0;
+            this.lsbMovies.SelectedIndexChanged += new System.EventHandler(this.lsbMovies_SelectedIndexChanged);
+            // 
+            // MovieSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ClientSize = new System.Drawing.Size(444, 450);
+            this.Controls.Add(this.lsbMovies);
+            this.Name = "MovieSelection";
+            this.Text = "MovieSelection";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox lsbMovies;
     }
 }
-
