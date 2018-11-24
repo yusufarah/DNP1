@@ -22,7 +22,7 @@ namespace CheckoutEmailService
         }
 
         public void sendBookingConfirmationTo(string email, string movieName, DateTime date_time,
-            decimal room, string seatNo, decimal price)
+            decimal room, int seatNo, decimal price)
         {
             var msg = new AE.Net.Mail.MailMessage
             {
@@ -31,7 +31,7 @@ namespace CheckoutEmailService
                 $"date and time: {date_time}" + Environment.NewLine +
                 $"Room: {room}" + Environment.NewLine +
                 $"seat: {seatNo}" + Environment.NewLine +
-                $"price: {price}",
+                $"price: {Math.Round(price, 2)}",
                 From = new MailAddress(SenderMail)
             };
 

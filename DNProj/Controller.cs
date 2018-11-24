@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckoutEmailService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace DNProj
     {
         private List<Movie> movies = new List<Movie>();
         private DBAccess dBAccess = new DBAccess();
+        private MailService mailservice = new MailService("VIACinema2018@gmail.com");
 
         public Controller()
         {
@@ -22,9 +24,16 @@ namespace DNProj
             return movies;
         }
 
-        public void addReservation(int seatNumber, int scheduleID, string email)
+        public void addReservation(int seatNumber, Schedule schedule, string email)
         {
-            dBAccess.makeNewReservation(seatNumber, scheduleID, email);
+            dBAccess.makeNewReservation(seatNumber, schedule.schedule_id, email);
+            mailservice.sendBookingConfirmationTo(
+                email,
+                schedule.Movie.name,
+                schedule.date_time,
+                schedule.room,
+                seatNumber,
+                (decimal)schedule.Movie.price);
         }
 
         public Schedule updateSchedule(Schedule schedule)

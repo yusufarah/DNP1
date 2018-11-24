@@ -34,7 +34,6 @@ namespace DNProj
             unitOfWork.Reservations.Add(reservation);
             unitOfWork.Complete();
 
-
         }
 
         public Schedule updateSchedule(Schedule schedule)

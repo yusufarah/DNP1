@@ -102,7 +102,7 @@ namespace DNProj
             {
                 if (Convert.ToInt32(txtboxSeatNumber.Text) == Convert.ToInt32(control.Name.Substring(3)))
                 {
-                    controller.addReservation(Convert.ToInt32(control.Name.Substring(3)), schedule.schedule_id, txtboxEmail.Text);
+                    controller.addReservation(Convert.ToInt32(control.Name.Substring(3)), schedule, txtboxEmail.Text);
                     controller.updateDB();
                     //control.BackColor = Color.Red;
                     schedule = controller.updateSchedule(schedule);
