@@ -36,5 +36,10 @@ namespace DNProj
 
 
         }
+
+        public Schedule updateSchedule(Schedule schedule)
+        {
+            return unitOfWork.Schedules.Get(schedule.schedule_id);
+        }
     }
 }
