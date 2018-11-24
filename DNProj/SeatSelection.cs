@@ -105,6 +105,13 @@ namespace DNProj
                     controller.addReservation(Convert.ToInt32(control.Name.Substring(3)), schedule.schedule_id, txtboxEmail.Text);
                     controller.updateDB();
                     //control.BackColor = Color.Red;
+                    schedule = controller.updateSchedule(schedule);
+                    panel1.Controls.Clear();
+                    CreateSeats();
+                    reserveSeats(schedule);
+                    btnReserve.Enabled = false;
+                    txtboxEmail.Text = "";
+                    lblReserveret.Text = "Your seat have been reserted";
                 }
                 
             }
