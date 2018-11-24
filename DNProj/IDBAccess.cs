@@ -11,6 +11,8 @@ namespace DNProj
     {
         IEnumerable<Movie> getAllMovies();
         void makeNewReservation(int seatNumber, int scheduleID, string email);
+        Schedule updateSchedule(Schedule schedule);
 
     }
+
 }
