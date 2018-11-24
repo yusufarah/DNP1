@@ -33,8 +33,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.lblSeatnumber = new System.Windows.Forms.Label();
             this.lblReserveret = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtboxEmail = new System.Windows.Forms.TextBox();
             this.txtboxSeatNumber = new System.Windows.Forms.TextBox();
+            this.lblEmail = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel1
@@ -85,12 +86,12 @@
             this.lblReserveret.TabIndex = 5;
             this.lblReserveret.Text = "temp";
             // 
-            // textBox1
+            // txtboxEmail
             // 
-            this.textBox1.Location = new System.Drawing.Point(615, 51);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(281, 20);
-            this.textBox1.TabIndex = 6;
+            this.txtboxEmail.Location = new System.Drawing.Point(615, 51);
+            this.txtboxEmail.Name = "txtboxEmail";
+            this.txtboxEmail.Size = new System.Drawing.Size(281, 20);
+            this.txtboxEmail.TabIndex = 6;
             // 
             // txtboxSeatNumber
             // 
@@ -100,12 +101,22 @@
             this.txtboxSeatNumber.Size = new System.Drawing.Size(80, 20);
             this.txtboxSeatNumber.TabIndex = 3;
             // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(548, 54);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(35, 13);
+            this.lblEmail.TabIndex = 7;
+            this.lblEmail.Text = "Email:";
+            // 
             // SeatSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 353);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lblEmail);
+            this.Controls.Add(this.txtboxEmail);
             this.Controls.Add(this.lblReserveret);
             this.Controls.Add(this.lblSeatnumber);
             this.Controls.Add(this.txtboxSeatNumber);
@@ -126,7 +137,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lblSeatnumber;
         private System.Windows.Forms.Label lblReserveret;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtboxEmail;
         private System.Windows.Forms.TextBox txtboxSeatNumber;
+        private System.Windows.Forms.Label lblEmail;
     }
 }

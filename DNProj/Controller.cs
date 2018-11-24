@@ -22,6 +22,11 @@ namespace DNProj
             return movies;
         }
 
+        public void addReservation(int seatNumber, int scheduleID, string email)
+        {
+            dBAccess.makeNewReservation(seatNumber, scheduleID, email);
+        }
+
         public void updateDB()
         {
             movies.Clear();

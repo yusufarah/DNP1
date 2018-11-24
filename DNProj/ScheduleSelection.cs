@@ -53,7 +53,7 @@ namespace DNProj
         }
 
         private void lsbSchedule_DoubleClick(object sender, EventArgs e)
-        {
+        {            
             SeatSelection seatSelection = new SeatSelection(lsbSchedule.SelectedItem as Schedule);
             seatSelection.ShowDialog();
         }

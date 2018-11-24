@@ -14,6 +14,7 @@ namespace DNProj
     public partial class SeatSelection : Form
     {
         private Schedule schedule;
+        private Controller controller = new Controller();
         public SeatSelection(Schedule s)
         {
             InitializeComponent();
@@ -71,8 +72,16 @@ namespace DNProj
             }
         }
 
+        public void repaintSeats()
+        {
+            panel1.Controls.Clear();
+            CreateSeats();
+            reserveSeats(schedule);
+        }
+
         private void label_Click(object sender, EventArgs e)
         {
+            txtboxEmail.Clear();
             Label temp = sender as Label;
             txtboxSeatNumber.Text = temp.Name.Substring(3);
             if (temp.BackColor == Color.Red)
@@ -93,7 +102,9 @@ namespace DNProj
             {
                 if (Convert.ToInt32(txtboxSeatNumber.Text) == Convert.ToInt32(control.Name.Substring(3)))
                 {
-                    control.BackColor = Color.Red;
+                    controller.addReservation(Convert.ToInt32(control.Name.Substring(3)), schedule.schedule_id, txtboxEmail.Text);
+                    controller.updateDB();
+                    //control.BackColor = Color.Red;
                 }
                 
             }

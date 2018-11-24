@@ -25,11 +25,14 @@ namespace DNProj
         {
             lsbMovies.Items.Clear();
             lsbMovies.DisplayMember = "name";
+            int x = 0;
 
             foreach (var item in controller.GetMovies())
             {
                 lsbMovies.Items.Add(item);
+                x++;
             }
+            Console.WriteLine(x);
         }
 
         private void lsbMovies_DoubleClick(object sender, EventArgs e)
