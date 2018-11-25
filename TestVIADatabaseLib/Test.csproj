@@ -96,9 +96,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\credentials.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CheckOutEmailService\CheckoutEmailService.csproj">
+      <Project>{4add4534-8cb2-4fdf-a5bb-731c88b22e4f}</Project>
+      <Name>CheckoutEmailService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VIACinemaDB\VIACinemaDB.csproj">
       <Project>{b2ea6d9a-34d3-45b2-8667-47b216689f8a}</Project>
       <Name>VIACinemaDB</Name>

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckoutEmailService", "Che
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMailServiceLib", "Test\TestMailServiceLib.csproj", "{E6EDBD50-1C53-42F0-A77A-472FE3BE2939}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVIADatabaseLib", "TestVIADatabaseLib\TestVIADatabaseLib.csproj", "{CE0A565D-F506-414C-A3DB-A57054A4CB30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "TestVIADatabaseLib\Test.csproj", "{CE0A565D-F506-414C-A3DB-A57054A4CB30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIACinemaDB", "VIACinemaDB\VIACinemaDB.csproj", "{B2EA6D9A-34D3-45B2-8667-47B216689F8A}"
 EndProject

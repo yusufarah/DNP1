@@ -7,6 +7,8 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Threading;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CheckoutEmailService
 {
@@ -21,32 +23,56 @@ namespace CheckoutEmailService
             gmailService = getGmailService();
         }
 
-        public void sendBookingConfirmationTo(string email, string movieName, DateTime date_time,
-            decimal room, int seatNo, decimal price)
+        public async Task<bool> sendBookingConfirmationToAsync(string email, string movieName, DateTime date_time,
+            decimal room, int seatNo, decimal price) 
         {
             var msg = new AE.Net.Mail.MailMessage
             {
                 Subject = "Thank you! Your booking details",
-                Body = $"Movie title: {movieName}"+ Environment.NewLine +
+                Body = $"Movie title: {movieName}" + Environment.NewLine +
                 $"date and time: {date_time}" + Environment.NewLine +
                 $"Room: {room}" + Environment.NewLine +
                 $"seat: {seatNo}" + Environment.NewLine +
                 $"price: {Math.Round(price, 2)}",
                 From = new MailAddress(SenderMail)
             };
-
             msg.To.Add(new MailAddress(email));
-            msg.ReplyTo.Add(msg.From); 
+            msg.ReplyTo.Add(msg.From);
             var msgStr = new StringWriter();
             msg.Save(msgStr);
 
-            
+
             var gmail = gmailService;
             var result = gmail.Users.Messages.Send(new Message
             {
                 Raw = Base64UrlEncode(msgStr.ToString())
             }, "me").Execute();
-            Console.WriteLine("Message ID {0} sent.", result.Id);
+
+            await Task.Delay(2000).ConfigureAwait(false);
+
+            bool success = emailSuccess(gmail, result.ThreadId);
+
+            return success;
+        }
+
+        public bool checkEmailFormat(string email)
+        {
+            try
+            {
+                new MailAddress(email);
+            }
+            catch (Exception e)
+            {
+                if (e is FormatException || e.InnerException is FormatException)
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return true;
         }
 
         private string Base64UrlEncode(string input)
@@ -63,7 +89,7 @@ namespace CheckoutEmailService
         {
             // If modifying these scopes, delete your previously saved credentials
             // at ~/.credentials/gmail-dotnet-quickstart.json
-            string[] Scopes = { GmailService.Scope.GmailCompose };
+            string[] Scopes = { GmailService.Scope.GmailCompose, GmailService.Scope.GmailModify };
             string ApplicationName = "VIA Cinema Check Out confirmation Service";
             UserCredential credential;
 
@@ -90,5 +116,18 @@ namespace CheckoutEmailService
 
             return (GmailService)service;
         }
+
+        private bool emailSuccess(GmailService service, string threadId)
+        {
+            
+            UsersResource.MessagesResource.ListRequest request = service.Users.Messages.List("me");
+            request.Q = "from=mailer-daemon@googlemail.com";
+            List<Message> list = (List<Message>)request.Execute().Messages;
+            
+            return !list.Exists(msg => msg.ThreadId == threadId);
+        }
+
+
+
     }
 }

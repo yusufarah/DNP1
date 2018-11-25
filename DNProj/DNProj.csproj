@@ -135,6 +135,7 @@
     <Content Include="bin\Debug\credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="bin\Debug\token.json\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,7 +146,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="bin\Debug\token.json\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

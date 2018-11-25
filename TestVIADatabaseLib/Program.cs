@@ -7,33 +7,35 @@ using VIACinemaDB.Util;
 using VIACinemaDB.Infrastructure;
 using VIACinemaDB.Model;
 using VIACinemaDB.Persistence;
+using CheckoutEmailService;
+
 namespace TestVIADataBaseLib
 {
     class Program
     {
         static void Main(string[] args)
         {
-            
+
 
 
             //ScheduleGenerator scheduleGenerator = new ScheduleGenerator();
             //scheduleGenerator.GenerateSchedule();
 
 
-            IUnitOfWork unitOfWork = new UnitOfWork(new VIACinemaEntities());
-            var movies = unitOfWork.Movies.GetAllScheduledMovies();
+            //IUnitOfWork unitOfWork = new UnitOfWork(new VIACinemaEntities());
+            //var movies = unitOfWork.Movies.GetAllScheduledMovies();
 
-            foreach (Movie movie in movies)
-            {
-                foreach (Schedule s in movie.Schedules)
-                {
-                    Console.WriteLine("{0}, {1}, {2}, {3} ",
-                        s.schedule_id,
-                        s.date_time,
-                        s.room,
-                        movie.name);
-                }
-            }
+            //foreach (Movie movie in movies)
+            //{
+            //    foreach (Schedule s in movie.Schedules)
+            //    {
+            //        Console.WriteLine("{0}, {1}, {2}, {3} ",
+            //            s.schedule_id,
+            //            s.date_time,
+            //            s.room,
+            //            movie.name);
+            //    }
+            //}
 
             //Schedule schedule1 = new Schedule()
             //{
@@ -150,6 +152,27 @@ namespace TestVIADataBaseLib
             //        reservation.room,
             //        reservation.seat_no);
             //}
+
+
+            MailService mailService = new MailService("VIACinema2018@gmail.com");
+            string email = "alsdkfja1324@hotmail.com";
+            if (mailService.checkEmailFormat(email))
+            {
+                Task<bool> sendConfirmation = mailService.sendBookingConfirmationToAsync(
+                    email,
+                    "abc",
+                    DateTime.Now,
+                    55,
+                    123,
+                    12);
+
+                bool success = sendConfirmation.Result;
+                Console.WriteLine("Sent: {0}", success);
+            }
+            else
+            {
+                Console.WriteLine("Bad email format");
+            }
             Console.WriteLine("Done");
             Console.ReadKey();
 
