@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DNProj", "DNProj\DNProj.csproj", "{164D24EE-F141-424E-81FF-36E738391F21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIACinemaMain", "DNProj\VIACinemaMain.csproj", "{164D24EE-F141-424E-81FF-36E738391F21}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckoutEmailService", "CheckOutEmailService\CheckoutEmailService.csproj", "{4ADD4534-8CB2-4FDF-A5BB-731C88B22E4F}"
 EndProject
